@@ -1,0 +1,14 @@
+name: identity_iris
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-identity-iris-keycloak:
+    uses: ./.github/workflows/_fetch_build_push_image.yml
+    with:
+      source_repository: 'telekom/identity-iris-keycloak-image'
+      target_image_name: 'identity-iris-keycloak'
+      target_image_tag: 'latest'
+      source_dockerfile: 'Dockerfile.multi-stage'
+      target_architecture: 'linux/amd64,linux/arm64'
