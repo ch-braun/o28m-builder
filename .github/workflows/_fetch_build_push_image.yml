@@ -22,6 +22,11 @@ on:
         required: false
         default: '.'
         type: string
+      source_build_args:
+        description: 'List of build-time variables'
+        required: false
+        default: ''
+        type: string
       target_architecture:
         description: 'Architecture to fetch'
         required: false
@@ -41,6 +46,7 @@ on:
         required: false
         default: ''
         type: string
+
 
     secrets:
       target_registry_password:
@@ -83,3 +89,5 @@ jobs:
         push: ${{ inputs.target_registry != '' }}
         tags: ${{ inputs.target_image }}
         platforms: ${{ inputs.target_architecture }}
+        build-args: |
+          ${{ inputs.source_build_args }}
