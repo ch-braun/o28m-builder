@@ -36,8 +36,7 @@ jobs:
   build-gateway-bash-curl:
     uses: ./.github/workflows/_fetch_build_push_image.yml
     with:
-      source_repository: 'telekom/gateway-issuer-service'
-      source_dockerfile: 'Dockerfile.bash-curl'
+      source_repository: 'ch-braun/bash-curl'
       target_image: 'ghcr.io/${{ github.repository_owner }}/gateway-bash-curl'
       target_architecture: 'linux/amd64'
       target_registry: 'ghcr.io'
