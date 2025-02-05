@@ -1,4 +1,4 @@
-name: identity_iris
+name: horizon
 
 on:
   workflow_dispatch:
