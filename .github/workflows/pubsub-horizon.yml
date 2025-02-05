@@ -1,4 +1,4 @@
-name: horizon
+name: pubsub-horizon
 
 on:
   workflow_dispatch:
@@ -9,13 +9,13 @@ permissions:
   id-token: write
 
 jobs:
-  build-horizon-cosmoparrot:
+  build-pubsub-horizon-cosmoparrot:
     uses: ./.github/workflows/_fetch_build_push_image.yml
     with:
-      source_repository: 'telekom/horizon-cosmoparrot'
+      source_repository: 'telekom/pubsub-horizon-cosmoparrot'
       source_branch: 'wip'
       source_dockerfile: 'Dockerfile'
-      target_image: 'ghcr.io/${{ github.repository_owner }}/horizon-cosmoparrot'
+      target_image: 'ghcr.io/${{ github.repository_owner }}/pubsub-horizon-cosmoparrot'
       target_architecture: 'linux/amd64'
       target_registry: 'ghcr.io'
       target_registry_username: ${{ github.actor }}
