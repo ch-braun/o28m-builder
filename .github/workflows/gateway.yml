@@ -39,7 +39,7 @@ jobs:
       source_repository: 'telekom-digioss/kong-plugin-jwt-keycloak'
       source_branch: 'master'
       source_build_args: |
-        KONG_VERSION=2.8.3
+        KONG_VERSION=2.8.1-alpine
         PLUGIN_VERSION=1.3.0-1
       target_image: 'ghcr.io/${{ github.repository_owner }}/gateway-kong'
       target_architecture: 'linux/amd64'
