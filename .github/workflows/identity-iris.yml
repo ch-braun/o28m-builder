@@ -14,7 +14,7 @@ jobs:
     with:
       source_repository: 'telekom/identity-iris-keycloak-image'
       source_dockerfile: 'Dockerfile.multi-stage'
-      target_image: 'ghcr.io/${{ github.repository_owner }}/identity-iris-keycloak'
+      target_image: 'ghcr.io/${{ github.repository_owner }}/o28m/identity-iris-keycloak'
       target_architecture: 'linux/amd64'
       target_registry: 'ghcr.io'
       target_registry_username: ${{ github.actor }}
@@ -25,7 +25,7 @@ jobs:
     with:
       source_repository: '${{ github.repository }}'
       source_dockerfile: 'Dockerfile.haproxy'
-      target_image: 'ghcr.io/${{ github.repository_owner }}/haproxy'
+      target_image: 'ghcr.io/${{ github.repository_owner }}/o28m/haproxy'
       target_architecture: 'linux/amd64'
       target_registry: 'ghcr.io'
       target_registry_username: ${{ github.actor }}
@@ -36,7 +36,7 @@ jobs:
     with:
       source_repository: '${{ github.repository }}'
       source_dockerfile: 'Dockerfile.postgresql'
-      target_image: 'ghcr.io/${{ github.repository_owner }}/postgresql'
+      target_image: 'ghcr.io/${{ github.repository_owner }}/o28m/postgresql'
       target_architecture: 'linux/amd64'
       target_registry: 'ghcr.io'
       target_registry_username: ${{ github.actor }}
