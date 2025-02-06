@@ -15,7 +15,18 @@ jobs:
       source_repository: 'telekom/identity-iris-keycloak-image'
       source_dockerfile: 'Dockerfile.multi-stage'
       target_image: 'ghcr.io/${{ github.repository_owner }}/identity-iris-keycloak'
-      target_architecture: 'linux/amd64,linux/arm64'
+      target_architecture: 'linux/amd64'
+      target_registry: 'ghcr.io'
+      target_registry_username: ${{ github.actor }}
+    secrets:
+      target_registry_password: ${{ secrets.GITHUB_TOKEN }}
+  build-postgresql:
+    uses: ./.github/workflows/_fetch_build_push_image.yml
+    with:
+      source_repository: '${{ github.repository }}'
+      source_dockerfile: 'Dockerfile.postgresql'
+      target_image: 'ghcr.io/${{ github.repository_owner }}/postgresql'
+      target_architecture: 'linux/amd64'
       target_registry: 'ghcr.io'
       target_registry_username: ${{ github.actor }}
     secrets:
