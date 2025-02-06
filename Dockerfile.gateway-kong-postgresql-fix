@@ -1,0 +1,39 @@
+## Build jwt-keycloak plugin
+
+ARG KONG_VERSION
+FROM docker.io/kong:${KONG_VERSION} as builder
+
+# Root needed to install dependencies
+USER root
+
+# Starting from kong 3.2 they move from alpine to debian .. so conditional install logic is needed
+ARG DISTO_ADDONS="git zip"
+RUN if [ -x "$(command -v apk)" ]; then apk add --no-cache $DISTO_ADDONS; \
+    elif [ -x "$(command -v apt-get)" ]; then apt-get update && apt-get install $DISTO_ADDONS; \
+    fi
+
+RUN git clone https://github.com/telekom-digioss/kong-plugin-jwt-keycloak.git /tmp
+
+WORKDIR /tmp
+
+ARG JWT_KC_PLUGIN_VERSION
+RUN luarocks make && luarocks pack kong-plugin-jwt-keycloak ${JWT_KC_PLUGIN_VERSION}
+
+## Create Image
+FROM docker.io/kong:${KONG_VERSION}
+
+ENV KONG_PLUGINS="bundled,jwt-keycloak"
+
+COPY --from=builder /tmp/*.rock /tmp/
+
+# Root needed for installing plugin
+USER root
+
+ARG JWT_KC_PLUGIN_VERSION
+RUN luarocks install /tmp/kong-plugin-jwt-keycloak-${JWT_KC_PLUGIN_VERSION}.all.rock
+
+## PostgreSQL v14+ fix: install luaossl
+RUN luarocks install luaossl OPENSSL_DIR=/usr/local/kong CRYPTO_DIR=/usr/local/kong
+
+# Switch back to kong user
+USER kong
