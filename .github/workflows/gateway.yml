@@ -66,12 +66,12 @@ jobs:
 ##############################################
 # Local helper images                        #
 ##############################################
-  build-gateway-bash-curl:
+  build-bash-curl:
     uses: ./.github/workflows/_fetch_build_push_image.yml
     with:
       source_repository: '${{ github.repository }}'
       source_dockerfile: 'Dockerfile.bash-curl'
-      target_image: 'ghcr.io/${{ github.repository_owner }}/o28m/gateway-bash-curl'
+      target_image: 'ghcr.io/${{ github.repository_owner }}/o28m/bash-curl'
       target_architecture: 'linux/amd64'
       target_registry: 'ghcr.io'
       target_registry_username: ${{ github.actor }}
